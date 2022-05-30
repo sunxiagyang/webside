@@ -1,0 +1,682 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>表格应用</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="070c88f3-995f-4b65-8065-a62f4d134478" class="page sans"><header><div class="page-header-icon undefined"><span class="icon">🧧</span></div><h1 class="page-title">表格应用</h1></header><div class="page-body"><h2 id="0d7584ed-6d21-44c8-9d44-d97ccd278bef" class="">一，基本操作:</h2><h3 id="4abd32ff-e75d-4727-a723-806bda327cf4" class="">定位ctrl+G</h3><p id="6fe83059-f4ee-48ed-be00-5531dac4fed2" class="">示例：填充空值：复制你要填充的值—-选择区域—-CTRL+G —选择空值—-ctrl+v粘贴</p><p id="9f2487a7-6901-43ad-ad32-a7a6ba73609c" class="">自动求和：选择区域—-CTRL+G —选择空值—-选择自动求和或者Alt+=</p><p id="f9167779-9f13-48a6-ad80-20c1197c30e5" class="">选择性删除：选择整列—筛选—-ctrl+g—-选择可见区域—-删除</p><h3 id="efd8e0e3-897b-4761-963d-16565cea2386" class="">查找和替换：ctrl+h/f</h3><h3 id="97d2e76e-b4d1-45c6-a9ac-8362f50cd799" class="">选择性粘贴：求和</h3><figure id="e08d2c11-0223-45e1-a656-65c45f2dc6db" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled.png"><img style="width:863px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled.png"/></a></figure><p id="88f4dfaf-9a76-4a40-8dd0-6d96df1042ad" class="">复制粘贴函数一般会出错需要选择性粘贴选择数值而不是把公式复制粘贴</p><h3 id="5f44ff15-3745-4ac2-b4f4-0015f1283dc3" class="">去除重复项</h3><figure id="fe048e9c-a8f3-439e-9724-959b94753f0f" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%201.png"><img style="width:1022px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%201.png"/></a></figure><p id="1cfb69d8-cae7-4d6e-9406-266e5a7d6e5a" class="">
+</p><h3 id="1245ac79-7ce2-442c-9031-b4878b2af4c3" class="">分列与合并</h3><p id="107ce064-52fd-491c-ad4f-887bc57f008a" class="">示例：按符号分列</p><figure id="b7ef40a9-3a55-490c-bd1b-471df2ba48a0" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%202.png"><img style="width:723px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%202.png"/></a></figure><p id="c0b57a29-fcab-401f-8b90-0e00cc71bb0c" class="">按宽度分列</p><figure id="7ed43093-dc2b-4445-b600-dd150ec33ce7" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%203.png"><img style="width:752px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%203.png"/></a></figure><p id="c1ddda0f-d058-4f7f-8a2f-b03105d939b7" class="">合并使用连字符&amp;：</p><figure id="55ee0854-a497-4632-974e-d9c0df7d8af6" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%204.png"><img style="width:567px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%204.png"/></a></figure><p id="e268af04-38e6-4571-9edc-fa44a8a698c0" class="">输出日期格式2010-10-18</p><p id="3f7c42a3-baec-440c-a8dc-47866ae402e1" class="">日期格式规范</p><h3 id="02d81fbb-de8e-4813-ad49-4d8dec54bdeb" class="">快捷键</h3><figure id="8f8fc319-2d56-4838-b750-062e5d981059" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%205.png"><img style="width:577px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%205.png"/></a></figure><figure id="a0e75874-e872-4796-99ab-715e831d2c59" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%206.png"><img style="width:888px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%206.png"/></a></figure><p id="ec5ab0fa-e855-42d8-b73a-7964def38b05" class="">复制粘贴函数一般会出错需要选择性粘贴</p><h2 id="15c85ca3-0340-4353-8153-cd43f0a076b0" class="">二，公式与函数用法</h2><figure id="3642b052-ab0e-4f02-9f84-2581488dbdfb" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%207.png"><img style="width:1136px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%207.png"/></a></figure><h3 id="430b420c-07ec-467a-ba49-92518e949b62" class="">绝对引用:$</h3><p id="8418484d-e28c-4586-81d5-d3bc55654dcf" class="">
+</p><h2 id="ebbbacec-e5cf-4faf-9af3-6685d82e4170" class="">1，if  逻辑函数</h2><p id="f4d08c4a-795e-4be8-9e96-3f831f9a6f23" class="">if(条件，满足条件的值，不满足条件的值）</p><p id="77afeb2d-39ad-431f-8d77-142589d9eaf8" class="">and（条件1，条件2，...）满足多个条件为真</p><p id="f5b36a17-34cf-4cca-b8f1-216724b8e070" class="">or（条件1，条件2，….)满足一个条件为真</p><p id="2f15fbde-be48-492d-8af6-6cc9311e204f" class="">if（and或者or(条件1,条件2,…..),true,faule)</p><p id="bacf66b9-9bcf-443f-86d4-1740575bd77e" class="">if嵌套函数</p><figure id="44f225bd-334c-493e-858d-1f542679a7f9" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%208.png"><img style="width:1385px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%208.png"/></a></figure><h3 id="9010b9c6-a09e-4110-bc50-a54ea9615884" class="">二，文本函数</h3><h3 id="7432e8e7-1791-4b4b-a52b-cc72fcb2bc39" class="">2.1right/left(字符串，文本个数）</h3><p id="15c8fb01-724d-4cca-91e1-248267a8699c" class="">mid(字符串，开始位置，字符个数）#每个字，每个单词，每个数字代表一个字符</p><figure id="8c45e5e5-55cc-4d77-9455-6b65d0c0088e" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%209.png"><img style="width:414px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%209.png"/></a></figure><h3 id="1948f6fc-6c0b-4bf7-8e3f-6e04685db849" class="">2.2文本格式转换：text（文本，格式）</h3><figure id="517cf507-87d8-42b2-8367-0eaf2df66cf8" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2010.png"><img style="width:457px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2010.png"/></a></figure><h3 id="d8818c85-e1ab-40b5-98cc-1ed356005e13" class="">2.3.文本替换：replace(文本，起始字符，字符个数，替换字符）</h3><figure id="706c291c-2445-4e5c-ab02-13c0cd6584f3" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2011.png"><img style="width:486px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2011.png"/></a></figure><h3 id="bf237177-b52a-4a4c-a745-d8a817d814d2" class="">三，统计函数</h3><h3 id="9ec2e026-757d-4e7c-bb2c-e9d3a2370929" class="">3.1.向下取整：int(值)</h3><figure id="c5b4c6cb-2de4-451f-b0af-332fd00acef4" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2012.png"><img style="width:387px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2012.png"/></a></figure><h3 id="dc816fdc-3e99-4570-8ff4-d780710dc231" class="">round（值，小数点后位数）</h3><figure id="4208b04e-dc78-4940-b94c-b12d7c1cd3d2" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2013.png"><img style="width:416px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2013.png"/></a></figure><h3 id="e94b0f9b-fd8b-45be-95ab-a9d746312dd6" class="">mod(除数，被除数）整除取余</h3><figure id="4ac6d805-be90-4242-b2c1-4fbb960e67a0" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2014.png"><img style="width:525px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2014.png"/></a></figure><h3 id="5f9aeade-4d64-458e-9e9f-6474c4a44af6" class="">求和sum/平均值average/最大max/最小/统计数量count(数值集合）</h3><h3 id="48d7858a-95aa-4be1-abcf-0331bff0fe37" class="">sumif(区域，条件，求和区域）</h3><figure id="8b723800-e726-48ac-b01f-b98fafe7407d" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2015.png"><img style="width:539px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2015.png"/></a></figure><h3 id="0f3928c7-3e91-4ecb-bfdd-49c11eac0ebb" class="">sumifs（球和区域，区域1，条件1，区域2，条件2. …)</h3><figure id="a5cfcb43-0941-48ba-83ff-10eca142512d" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2016.png"><img style="width:810px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2016.png"/></a></figure><h3 id="8e2d3856-78e3-4295-a702-426256fac26b" class="">countif 统计数量</h3><figure id="466149c8-982e-46d3-a1db-ceeeda99dd46" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2017.png"><img style="width:591px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2017.png"/></a></figure><h3 id="9c4b0229-f97e-48ab-8ec0-47c5e4febf68" class="">countifs  多条件统计数量</h3><figure id="d5f5c56a-98b1-4b45-8ce5-ab9b6e859b49" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2018.png"><img style="width:713px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2018.png"/></a></figure><h3 id="9707791d-9501-4417-b5dd-856b3f62b58d" class="">vlookup查找与引用函数</h3><p id="e01b1a09-d0c6-4731-a2d4-cce48a9364a6" class="">vlookup(查找值，查找范围，查找范围中第几列，1模糊查找/0精确查找）</p><figure id="4b2169ed-67c1-4f2d-8981-f8dd321912f8" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2019.png"><img style="width:966px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2019.png"/></a></figure><h3 id="7f8cb178-f46a-486e-bffc-feaa7f65e707" class="">MATCH匹配函数</h3><p id="51f90aa9-e577-499a-a6e6-e6ee9ecb3c79" class="">match（值，范围，1小于/-1大于/0精确匹配）</p><figure id="da42d53a-3146-41c5-b2ac-97f2ccb06b46" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2020.png"><img style="width:790px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2020.png"/></a></figure><h3 id="263fecd1-228d-4af2-92ea-51586e2da761" class="">日期函数</h3><p id="77dfe3d3-38b2-43d6-82b5-e6ebe488bde8" class="">today():当前日期</p><p id="d8b066d7-21aa-4e37-8ce0-7bdd48400fb1" class="">now():当前日期时间</p><p id="11c1f68b-ff8f-44a4-8121-12d5a6a9d63b" class="">date():年月日</p><figure id="2be022fb-81e0-46e7-8ccf-d8155776a036" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2021.png"><img style="width:458px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2021.png"/></a></figure><p id="76393793-09b7-4eb0-bad1-231fa5a33c5b" class="">datedif(开始时间，结束时间，相差时间d/m/y)</p><figure id="efe38fce-20a3-4c63-b435-169e15f740d8" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2022.png"><img style="width:629px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2022.png"/></a></figure><h3 id="f7d3ccd1-e82c-44d7-a486-29575d8c0ece" class="">数据透视表：鼠标定位工作区—插入—数据透视表：</h3><p id="5d20406e-2122-432e-84e3-e62de6328ae4" class="">把明细表分类汇总</p><p id="1c431474-c715-4fba-a677-03d2b0eb3925" class="">数据量大</p><p id="d91fe77b-a518-44c9-813b-ff67908081fa" class="">快速汇总</p><p id="ed6e1230-7415-415f-8479-d5be3c27c032" class="">快速分析</p><h3 id="d16b72e3-43e8-4541-a46b-441d8709c170" class="">注意事项：</h3><p id="1a44811f-c3e5-4fcf-ad33-fa96d62ad33d" class="">列标题不能为空</p><p id="4b71d0a5-6972-4fe1-8325-be184e3d4974" class="">列标题不能重复</p><p id="19d86800-b3b5-42ba-b429-3a1f41dbbba9" class="">不能有空行</p><p id="34fc9120-b039-48da-957a-ee350b3fc3b5" class="">不能有合并单元格</p><p id="37298455-65ee-44f3-8f9b-b42648472dcd" class="">数据类型保持一致</p><h3 id="a22c4b95-83d3-49f3-a75e-16feaedc3abf" class="">数据透视表常用功能：</h3><p id="ee61b735-c65a-47e1-a511-02641b9d10b2" class="">1：数据更新：数据更改后  ，数据表怎么更新</p><p id="866b4e4d-db85-4d02-ae9f-daa07c5688c1" class="">鼠标定位到透视表—-透视表工具— 分析—刷新</p><p id="cc43a2c4-9742-4520-be89-181f94a95402" class="">2.：数据源内容新增一行或一列，底部或边界新增，数据表更新</p><p id="4954b43d-b42e-43dc-b465-d43a99ccd6a7" class="">鼠标定位到透视表—-透视表工具—分析—-更新数据源—-重新划分区域</p><p id="b61f1741-e672-41e2-b618-d8473f1a925f" class="">3.：对透视表排序</p><p id="371438c1-d3cb-4726-9e1d-1382333dc7a1" class="">行标签下拉—其他排序选项—选择要排序的选项</p><p id="8331cc5c-f666-4b70-a06e-a930997ddf49" class="">4.：在透视表中增加计算列</p><p id="757e52cd-921a-4d03-b625-0f7b94e2fec4" class="">鼠标定位数据透视表列—-透视表工具—分析—字段，项目和集—添加名称—选取字段加公式</p><figure id="18b078fb-de6b-4ec2-8246-47aa0992640e" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2023.png"><img style="width:1022px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2023.png"/></a></figure><p id="33131966-f88e-408a-865e-9d9ab56735d8" class="">5，在数据透视表中增加计算行</p><p id="7a56022c-93a8-45ed-a5d8-25a608b5bf3b" class="">鼠标定位数据透视表行—-透视表工具—分析—字段，项目和集</p><figure id="51cb6560-6934-4893-a995-6509d1d22263" class="image"><a href="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2024.png"><img style="width:1121px" src="%E8%A1%A8%E6%A0%BC%E5%BA%94%E7%94%A8%20e08d2c11022345e1a65665c45f2dc6db/Untitled%2024.png"/></a></figure><p id="0ac420b7-e30b-4876-a9b7-58d19008a337" class="">6.：动态筛选数据透视表内容：切片器</p><p id="d6872be1-bd50-4f69-843d-9aa7839052b9" class="">数据美化：</p><p id="e3f9dfbe-77a1-424f-84ae-dfb1f7930ce6" class="">透视表 工具—分析—+/-取消缩进</p><p id="3f1eef04-5e75-4a6b-a6e8-b93b98ebe0ef" class="">透视表工具—设计—-报表布局:以表格形式呈现/分类汇总—取消汇总数据</p><p id="b8b6aeba-5dbc-475e-be56-f24ede322782" class="">合并单元格</p><p id="2a211e14-6287-4510-a1b1-0fd4f9459528" class="">透视表工具—分析—选项—合并居中列表标签</p><p id="59460fcb-8022-4b57-ae89-4f774fd03bfa" class="">透视表工具—分析—插入切片器</p><p id="703dc005-b3e2-40b5-9b02-cf446e0cf8be" class="">7.：合并多个格式一样的表</p><p id="0012400a-ccf7-4fb6-9366-ba73c025d736" class="">文件—选项—自定义功能区—不在功能区中的命令—数据透视表和数据透视图向导—点数据—新建组—添加—成功后回到页面</p><p id="a41c0e6c-4f5f-4889-93f7-657d77b741d6" class="">数据—数据透视表和数据选项图向导</p><p id="7c8afaa8-9264-4a02-9eef-512e2e1b179f" class="">或者alt+D+P—-多重合并—-选择区域—-添加—-新/现有工作表—-完成</p><p id="529323fa-5d56-4132-afb8-b25f7de22cf8" class="">8.透视图</p><p id="97db81cb-d7dd-4ce7-a3b7-881159eb526c" class="">数据透视工具—分析—数据透视图</p><p id="70c30e3d-1cc8-4013-8568-7d46e09e6f40" class="">
+</p><p id="b1294a2f-7b9b-4fe8-a795-eb5653a26d80" class="">
+</p><p id="bd0b4e18-0ec4-4bd1-814b-41e53738abf0" class="">
+</p><p id="8f53e2b9-edcd-408b-91b3-ea55939fbbcf" class="">
+</p><p id="b3022baf-b92e-454d-99d3-a96c81e224d8" class="">
+</p><p id="f8a6a594-58da-4c31-a180-a0a22d083a8d" class="">
+</p><p id="23545112-99ea-46be-bde7-657663a1f938" class="">
+</p><p id="f30d5279-c4d0-4268-8f7c-ccfa9f425575" class="">
+</p><p id="d9a74e65-1b3d-4824-9aef-0a484d56a0f7" class="">
+</p><p id="71d1d05c-605d-4ff0-86f9-b2f6549d6b4e" class="">
+</p><p id="5ea05d68-484f-48c2-93da-65586f6d2dcb" class="">
+</p></div></article></body></html>
